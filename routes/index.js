@@ -21,13 +21,9 @@ router.get('/', function(req, res, next) {
   res.send('Welcome to our myMoviz backend!');
 });
 
-/* GET home. */
-router.get('/', function(req, res, next) {
-  res.send('Welcome to our myMoviz backend!');
-});
 
 /* GET movies. */
-router.get('/movies', function(req, res, next) {
+router.get('https://dashboard.heroku.com/apps/backmymoviz/movies', function(req, res, next) {
   request(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr&page=1&sort_by=popularity.desc&include_adult=false&include_video=false`, function(error, response, body) {
     body = JSON.parse(body);
     res.json({result: true, movies: body.results});
@@ -35,7 +31,7 @@ router.get('/movies', function(req, res, next) {
 });
 
 /* GET mymovies. */
-router.get('/mymovies', function(req, res, next) {
+router.get('https://dashboard.heroku.com/apps/backmymoviz/mymovies', function(req, res, next) {
   // Here, we want to find every movies that we have in our collection movies on mlab
   movieModel.find(function(error, data) {
     res.json({result: true, data});
@@ -43,7 +39,7 @@ router.get('/mymovies', function(req, res, next) {
 });
 
 /* POST mymovies. */
-router.post('/mymovies', function(req, res, next) {
+router.post('https://dashboard.heroku.com/apps/backmymoviz/mymovies', function(req, res, next) {
   console.log("route ok");
   console.log(req.body)
   // Now, we want to save a new movie.
